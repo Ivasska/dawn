@@ -105,13 +105,13 @@ if (!customElements.get('product-info')) {
         return this.dataset.section.includes('featured_product');
       }
 
-      handleSwapProduct(baseUrl) {
+      handleSwapProduct(productUrl) {
         return (html) => {
           this.productModal?.remove();
 
           // Grab the selected variant from the new product info
           const variant = this.getSelectedVariant(html.querySelector(`product-info[data-section=${this.sectionId}]`));
-          this.updateURL(baseUrl, variant?.id);
+          this.updateURL(productUrl, variant?.id);
 
           // If we are in an embedded context (quick add, featured product, etc), only swap product info.
           // Otherwise, refresh the entire page content and sibling sections.
@@ -172,13 +172,13 @@ if (!customElements.get('product-info')) {
         if (variantSelects) this.variantSelectors.innerHTML = variantSelects.innerHTML;
       }
 
-      handleUpdateProductInfo(baseUrl) {
+      handleUpdateProductInfo(productUrl) {
         return (html) => {
           const variant = this.getSelectedVariant(html);
 
           this.pickupAvailability?.update(variant);
           this.updateOptionValues(html);
-          this.updateURL(baseUrl, variant?.id);
+          this.updateURL(productUrl, variant?.id);
           this.updateVariantInputs(variant?.id);
 
           if (!variant) {
